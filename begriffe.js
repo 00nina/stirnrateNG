@@ -155,7 +155,7 @@ const KATEGORIEN = [
        "Frisch gepresster Orangensaft", "Milchshake", "Hausgemachte Limonade", "Holunderblütenschorle", 
        "Ginger Ale", "Tonic Water", "Cola", "Orangenlimonade", "Eistee", "Grüner Tee", 
        "Schwarzer Tee", "Rooibos-Tee", "Pfefferminztee", "Ingwertee", "Kombucha", "Mineralwasser", "Zitronenwasser", 
-       "Hibiskustee", "Virgin Piña Colada", "Traubensaft", "Apfelsaft", "Frappé", "Rüscherl, "Voddi Bull", "Liquid Cocaine"
+       "Hibiskustee", "Virgin Piña Colada", "Traubensaft", "Apfelsaft", "Frappé", "Rüscherl", "Voddi Bull", "Liquid Cocaine"
     ]
   },
   {
