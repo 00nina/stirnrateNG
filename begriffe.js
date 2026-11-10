@@ -36,7 +36,7 @@ const KATEGORIEN = [
       "Specht", "Storch", "Schwan", "Möwe", "Kolibri", "Strauß", "Truthahn", "Hahn", "Esel",
       "Alpaka", "Kamel", "Schaf", "Ziege", "Wildschwein", "Meerschweinchen", "Hamster",
       "Goldfisch", "Dackel", "Mops", "Golden Retriever", "Schäferhund", "Pudel", "Gorilla",
-      "Schimpanse", "Erdmännchen", "Panda", "Elch", "Rentier", "Murmeltier", "Einhorn", "Drache"
+      "Schimpanse", "Erdmännchen", "Panda", "Elch", "Rentier", "Murmeltier", "Kakerlake", "Weisskopfseeadler"
     ]
   },
   {
