@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>NG's Stirnraten App</title>
+  <meta name="description" content="Stirnraten für euren Freundeskreis: klassisch oder in Teams, mit eigenen Kategorien.">
+
+  <!-- Damit die App vom Home-Bildschirm wie eine echte App startet -->
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#1B1437">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="StirnrateNG">
+  <link rel="apple-touch-icon" href="icon-180.png">
+  <link rel="icon" type="image/png" href="icon-192.png">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============ STARTSEITE ============ -->
+  <section class="seite aktiv" id="s-start">
+    <div class="start-kopf">
+      <h1 class="titel">NG's<br>Stirnraten<br>App</h1>
+      <div class="karten-stapel" aria-hidden="true">
+        <div class="stapel-karte k3"></div>
+        <div class="stapel-karte k2"></div>
+        <div class="stapel-karte k1"><span id="beispielWort">Faultier</span></div>
+      </div>
+    </div>
+
+    <div class="modus-liste">
+      <button class="modus modus-klassisch" id="btnKlassisch">
+        <span class="modus-name">Klassisch</span>
+        <span class="modus-text">Eine Kategorie, eine Runde, so viele Begriffe wie möglich.</span>
+      </button>
+      <button class="modus modus-teams" id="btnTeams">
+        <span class="modus-name">Teams</span>
+        <span class="modus-text">Mehrere Teams treten über feste Runden gegeneinander an.</span>
+      </button>
+    </div>
+
+    <div class="start-fuss">
+      <button class="knopf leise" id="btnEigene">Eigene Kategorien</button>
+      <button class="knopf leise" id="btnHilfe">So geht's</button>
+    </div>
+
+    <div class="tipp" id="installTipp" hidden>
+      <p><strong>Als App speichern:</strong> In Safari auf das Teilen-Symbol tippen und „Zum Home-Bildschirm“ wählen.</p>
+      <button class="tipp-zu" id="installTippZu" aria-label="Hinweis schließen">Schließen</button>
+    </div>
+  </section>
+
+  <!-- ============ TEAMS EINRICHTEN ============ -->
+  <section class="seite" id="s-teams">
+    <header class="kopf">
+      <button class="zurueck" data-zu="s-start">Zurück</button>
+      <h2>Teams</h2>
+    </header>
+
+    <div class="feld">
+      <div class="feld-titel">Wer spielt?</div>
+      <div id="teamListe"></div>
+      <button class="knopf leise breit" id="btnTeamNeu">Team hinzufügen</button>
+    </div>
+
+    <div class="feld">
+      <div class="feld-titel">Runden</div>
+      <div class="zaehler">
+        <button class="zaehler-knopf" id="rundenMinus" aria-label="Eine Runde weniger">−</button>
+        <div class="zaehler-wert"><span id="rundenWert">3</span></div>
+        <button class="zaehler-knopf" id="rundenPlus" aria-label="Eine Runde mehr">+</button>
+      </div>
+      <p class="klein">In jeder Runde ist jedes Team einmal dran.</p>
+    </div>
+
+    <div class="feld">
+      <div class="feld-titel">Zeit pro Zug</div>
+      <div class="auswahl" data-auswahl="zeit"></div>
+    </div>
+
+    <div class="feld">
+      <div class="feld-titel">Steuerung</div>
+      <div class="auswahl" data-auswahl="steuerung"></div>
+    </div>
+
+    <div class="feld">
+      <div class="feld-titel">Töne</div>
+      <div class="auswahl" data-auswahl="ton"></div>
+    </div>
+
+    <div class="unten">
+      <button class="knopf haupt breit" id="btnTeamsWeiter">Kategorie wählen</button>
+    </div>
+  </section>
+
+  <!-- ============ KATEGORIE WÄHLEN ============ -->
+  <section class="seite" id="s-kategorien">
+    <header class="kopf">
+      <button class="zurueck" id="katZurueck">Zurück</button>
+      <h2>Kategorie wählen</h2>
+    </header>
+    <div class="kacheln" id="kachelListe"></div>
+  </section>
+
+  <!-- ============ VOR DEM ZUG ============ -->
+  <section class="seite" id="s-bereit">
+    <header class="kopf">
+      <button class="zurueck" id="bereitZurueck">Zurück</button>
+      <h2 id="bereitTitel">Gleich geht's los</h2>
+    </header>
+
+    <div class="bereit-karte" id="bereitKarte">
+      <div class="bereit-emoji" id="bereitEmoji"></div>
+      <div class="bereit-name" id="bereitName"></div>
+      <div class="bereit-hinweis" id="bereitHinweis"></div>
+    </div>
+
+    <div id="bereitTeam" hidden>
+      <p class="dran">Am Zug</p>
+      <p class="dran-name" id="dranName"></p>
+      <div class="stand" id="standListe"></div>
+    </div>
+
+    <div id="bereitEinstellungen">
+      <div class="feld">
+        <div class="feld-titel">Zeit</div>
+        <div class="auswahl" data-auswahl="zeit"></div>
+      </div>
+      <div class="feld">
+        <div class="feld-titel">Steuerung</div>
+        <div class="auswahl" data-auswahl="steuerung"></div>
+      </div>
+      <div class="feld">
+        <div class="feld-titel">Töne</div>
+        <div class="auswahl" data-auswahl="ton"></div>
+      </div>
+    </div>
+
+    <p class="klein mitte" id="bereitErklaerung"></p>
+
+    <div class="unten">
+      <button class="knopf haupt breit gross" id="btnStart">Runde starten</button>
+    </div>
+  </section>
+
+  <!-- ============ ERGEBNIS EINES ZUGS ============ -->
+  <section class="seite" id="s-ergebnis">
+    <header class="kopf">
+      <h2 id="ergebnisTitel">Ergebnis</h2>
+    </header>
+    <div class="punkte">
+      <div class="punkte-zahl" id="punkteZahl">0</div>
+      <div class="punkte-text" id="punkteText">Begriffe erraten</div>
+    </div>
+    <p class="klein mitte" id="ergebnisTipp">Falsch erkannt? Tippe auf einen Begriff, um ihn zu ändern.</p>
+    <ol class="verlauf" id="verlaufListe"></ol>
+    <div class="unten" id="ergebnisKnoepfe"></div>
+  </section>
+
+  <!-- ============ SIEGEREHRUNG ============ -->
+  <section class="seite" id="s-finale">
+    <header class="kopf"><h2>Siegerehrung</h2></header>
+    <p class="sieger" id="siegerText"></p>
+    <ol class="rangliste" id="rangListe"></ol>
+    <div class="unten">
+      <button class="knopf haupt breit" id="btnRevanche">Revanche</button>
+      <button class="knopf leise breit" id="btnFinaleStart">Zur Startseite</button>
+    </div>
+  </section>
+
+  <!-- ============ EIGENE KATEGORIEN ============ -->
+  <section class="seite" id="s-eigene">
+    <header class="kopf">
+      <button class="zurueck" data-zu="s-start">Zurück</button>
+      <h2>Eigene Kategorien</h2>
+    </header>
+    <div id="eigeneListe"></div>
+    <div class="unten">
+      <button class="knopf haupt breit" id="btnKatNeu">Neue Kategorie</button>
+      <button class="knopf leise breit" id="btnImport">Kategorie importieren</button>
+    </div>
+  </section>
+
+  <!-- ============ KATEGORIE BEARBEITEN ============ -->
+  <section class="seite" id="s-editor">
+    <header class="kopf">
+      <button class="zurueck" id="editorZurueck">Fertig</button>
+      <h2>Kategorie bearbeiten</h2>
+    </header>
+
+    <div class="feld">
+      <label class="feld-titel" for="katName">Name</label>
+      <input class="eingabe" id="katName" type="text" maxlength="30" placeholder="z. B. Mädelsurlaub" autocomplete="off">
+    </div>
+
+    <div class="feld">
+      <div class="feld-titel">Symbol</div>
+      <div class="emoji-wahl" id="emojiWahl"></div>
+    </div>
+
+    <div class="feld">
+      <label class="feld-titel" for="neuerBegriff">Begriffe <span class="anzahl" id="begriffAnzahl"></span></label>
+      <form class="begriff-form" id="begriffForm">
+        <input class="eingabe" id="neuerBegriff" type="text" maxlength="60" placeholder="Begriff oder Insider" autocomplete="off" enterkeyhint="done">
+        <button class="knopf haupt" type="submit">Hinzufügen</button>
+      </form>
+      <p class="klein" id="begriffHinweis"></p>
+      <ul class="begriffe" id="begriffListe"></ul>
+    </div>
+
+    <div class="feld">
+      <label class="schalter">
+        <input type="checkbox" id="katImMix">
+        <span>Auch in „Dies &amp; Das“ untermischen</span>
+      </label>
+    </div>
+
+    <div class="unten">
+      <button class="knopf haupt breit" id="btnTeilen">Kategorie teilen</button>
+      <button class="knopf gefahr breit" id="btnKatLoeschen">Kategorie löschen</button>
+    </div>
+  </section>
+
+  <!-- ============ SO GEHT'S ============ -->
+  <section class="seite" id="s-hilfe">
+    <header class="kopf">
+      <button class="zurueck" data-zu="s-start">Zurück</button>
+      <h2>So geht's</h2>
+    </header>
+    <div class="hilfe">
+      <h3>Spielen</h3>
+      <ol>
+        <li>Kategorie wählen und auf „Runde starten“ tippen.</li>
+        <li>Handy quer an die Stirn halten, Display zu den anderen.</li>
+        <li>Die anderen beschreiben den Begriff, ohne ihn zu nennen.</li>
+        <li>Erraten: Handy nach unten kippen. Überspringen: nach oben kippen.</li>
+        <li>Danach das Handy wieder gerade halten, dann kommt der nächste Begriff.</li>
+      </ol>
+      <h3>Wenn das Kippen nicht reagiert</h3>
+      <p>Beim ersten Start fragt das iPhone, ob die App Bewegung und Ausrichtung nutzen darf. Tippe auf „Erlauben“. Hast du abgelehnt, schließe die App ganz und öffne sie neu. Alternativ stellst du die Steuerung auf „Tippen“.</p>
+      <h3>Töne</h3>
+      <p>Mit eingeschalteten Tönen hört ihr die Signale auch im Lautlos-Modus. Musik, die auf demselben Handy läuft, kann dabei pausieren. Dann die Töne hier ausschalten.</p>
+      <div class="auswahl" data-auswahl="ton"></div>
+      <h3>Eigene Kategorien teilen</h3>
+      <ol>
+        <li>Kategorie öffnen und auf „Kategorie teilen“ tippen, zum Beispiel per WhatsApp.</li>
+        <li>Die Empfängerin kopiert die ganze Nachricht.</li>
+        <li>In ihrer App: „Eigene Kategorien“, dann „Kategorie importieren“ und einfügen.</li>
+      </ol>
+      <p>Eigene Kategorien liegen nur auf diesem Handy. Speichere die App auf dem Home-Bildschirm, damit sie dauerhaft erhalten bleiben.</p>
+    </div>
+  </section>
+
+  <!-- ============ SPIELBÜHNE (liegt im Querformat über allem) ============ -->
+  <div class="buehne" id="buehne" hidden>
+    <div class="zeit-balken"><div class="zeit-fuellung" id="zeitFuellung"></div></div>
+
+    <div class="buehne-oben">
+      <div class="zeit" id="zeitAnzeige">1:00</div>
+      <button class="pause-knopf" id="btnPause">Pause</button>
+      <div class="treffer" id="trefferAnzeige">0 erraten</div>
+    </div>
+
+    <div class="wort-box" id="wortBox">
+      <div class="wort" id="wort"></div>
+    </div>
+    <div class="buehne-unten" id="buehneUnten"></div>
+
+    <div class="tipp-knoepfe" id="tippKnoepfe" hidden>
+      <button class="tipp-knopf nein" id="btnTippNein">Überspringen</button>
+      <button class="tipp-knopf ja" id="btnTippJa">Richtig</button>
+    </div>
+
+    <div class="buehne-pause" id="buehnePause" hidden>
+      <p>Pause</p>
+      <div class="pause-knoepfe">
+        <button class="knopf haupt" id="btnWeiter">Weiterspielen</button>
+        <button class="knopf leise" id="btnAbbruch">Runde abbrechen</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ DIALOG UND KURZMELDUNG ============ -->
+  <div class="schleier" id="dialog" hidden>
+    <div class="dialog-box" role="dialog" aria-modal="true">
+      <p class="dialog-text" id="dialogText"></p>
+      <textarea class="eingabe dialog-feld" id="dialogFeld" rows="6" hidden></textarea>
+      <div class="dialog-knoepfe" id="dialogKnoepfe"></div>
+    </div>
+  </div>
+  <div class="meldung" id="meldung" role="status" hidden></div>
+
+  <script src="begriffe.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

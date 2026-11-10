@@ -1,0 +1,698 @@
+/* =====================================================================
+   AUSSEHEN DER APP
+   =====================================================================
+   Die Farben stehen gleich hier oben. Wenn du einen Farbwert änderst,
+   ändert er sich überall in der App. Die Farben der einzelnen
+   Kategorien stehen in begriffe.js.
+   ===================================================================== */
+
+:root {
+  --nacht: #1B1437;      /* Hintergrund */
+  --nacht-hell: #2A2150; /* Flächen auf dem Hintergrund */
+  --nacht-linie: #43397A;/* Ränder */
+  --creme: #FFF6E9;      /* Schrift auf dunklem Grund */
+  --creme-leise: #BFB6DA;/* Nebentexte */
+  --tinte: #150F2D;      /* Schrift auf bunten Flächen */
+
+  --koralle: #FF5C5C;
+  --safran: #FFB627;
+  --minze: #1FD1A5;
+  --kobalt: #4D7CFE;
+  --flieder: #B28DFF;
+  --pink: #FF6FB5;
+
+  --richtig: #22C987;    /* Aufblitzen bei "Richtig" */
+  --weiter: #FF5252;     /* Aufblitzen bei "Übersprungen" */
+
+  --rand-oben: env(safe-area-inset-top, 0px);
+  --rand-unten: env(safe-area-inset-bottom, 0px);
+}
+
+@font-face {
+  font-family: "Bricolage";
+  src: url("schrift.woff2") format("woff2");
+  font-weight: 200 800;
+  font-display: swap;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  background: var(--nacht);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  font-family: "Bricolage", -apple-system, "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.4;
+  color: var(--creme);
+  background: var(--nacht);
+  min-height: 100vh;
+  min-height: 100dvh;
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+input, textarea {
+  font: inherit;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+[hidden] { display: none !important; }
+
+:focus-visible {
+  outline: 3px solid var(--safran);
+  outline-offset: 2px;
+}
+
+/* ---------- Seiten ---------- */
+
+.seite {
+  display: none;
+  flex-direction: column;
+  gap: 22px;
+  max-width: 520px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: calc(var(--rand-oben) + 18px) 20px calc(var(--rand-unten) + 24px);
+}
+.seite.aktiv { display: flex; }
+
+.kopf {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+}
+.kopf h2 {
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.zurueck {
+  justify-self: start;
+  padding: 8px 14px 8px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--creme-leise);
+}
+.zurueck::before { content: "‹ "; }
+
+.unten {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+.klein { font-size: 14px; color: var(--creme-leise); }
+.mitte { text-align: center; }
+
+/* ---------- Knöpfe ---------- */
+
+.knopf {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.15;
+  text-align: center;
+}
+.knopf.breit { width: 100%; }
+.knopf.gross { min-height: 64px; font-size: 21px; }
+.knopf.haupt { background: var(--creme); color: var(--tinte); }
+.knopf.leise { border: 2px solid var(--nacht-linie); color: var(--creme); }
+.knopf.gefahr { color: var(--koralle); }
+.knopf:active { transform: scale(0.97); }
+.knopf:disabled { opacity: 0.4; }
+
+/* ---------- Startseite ---------- */
+
+#s-start { gap: 26px; }
+
+.start-kopf {
+  position: relative;
+  padding-top: 14px;
+  min-height: 248px;
+}
+
+.titel {
+  position: relative;
+  z-index: 2;
+  font-size: clamp(50px, 15.5vw, 76px);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+}
+
+/* Der Kartenstapel rechts neben dem Titel zeigt echte Begriffe */
+.karten-stapel {
+  position: absolute;
+  right: -6px;
+  bottom: 0;
+  width: 172px;
+  height: 108px;
+  z-index: 1;
+}
+.stapel-karte {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+}
+.stapel-karte.k3 { background: var(--pink); transform: rotate(9deg) translate(8px, -14px); }
+.stapel-karte.k2 { background: var(--minze); transform: rotate(3deg) translate(4px, -7px); }
+.stapel-karte.k1 {
+  background: var(--safran);
+  color: var(--tinte);
+  transform: rotate(-4deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 1.05;
+  text-align: center;
+  letter-spacing: -0.01em;
+}
+
+.modus-liste { display: grid; gap: 12px; }
+
+.modus {
+  display: grid;
+  gap: 6px;
+  padding: 20px 22px 22px;
+  border-radius: 24px;
+  color: var(--tinte);
+  text-align: left;
+}
+.modus:active { transform: scale(0.98); }
+.modus-klassisch { background: var(--koralle); }
+.modus-teams { background: var(--kobalt); }
+.modus-name {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.modus-text { font-size: 15px; font-weight: 500; line-height: 1.3; max-width: 30ch; }
+
+.start-fuss { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.start-fuss .knopf { padding-left: 10px; padding-right: 10px; font-size: 16px; }
+
+.tipp {
+  display: grid;
+  gap: 6px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: var(--nacht-hell);
+  font-size: 14px;
+}
+.tipp-zu { justify-self: start; font-weight: 700; color: var(--safran); padding: 4px 0; }
+
+/* ---------- Felder und Auswahl ---------- */
+
+.feld { display: grid; gap: 10px; }
+.feld-titel { font-size: 15px; font-weight: 600; color: var(--creme-leise); }
+.anzahl { color: var(--creme); }
+
+.auswahl { display: flex; flex-wrap: wrap; gap: 8px; }
+.wahl {
+  min-height: 46px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 2px solid var(--nacht-linie);
+  font-weight: 700;
+  font-size: 16px;
+}
+.wahl.an { background: var(--creme); border-color: var(--creme); color: var(--tinte); }
+
+.eingabe {
+  width: 100%;
+  min-height: 50px;
+  padding: 10px 16px;
+  border-radius: 14px;
+  border: 2px solid var(--nacht-linie);
+  background: var(--nacht-hell);
+  color: var(--creme);
+  font-size: 17px; /* unter 16px zoomt das iPhone beim Tippen hinein */
+}
+.eingabe::placeholder { color: #8E84B5; }
+.eingabe:focus { outline: none; border-color: var(--safran); }
+
+.schalter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+}
+.schalter input { width: 24px; height: 24px; accent-color: var(--safran); }
+
+/* ---------- Teams einrichten ---------- */
+
+#teamListe { display: grid; gap: 8px; }
+.team-zeile {
+  display: grid;
+  grid-template-columns: 18px 1fr auto;
+  align-items: center;
+  gap: 10px;
+}
+.team-punkt { width: 18px; height: 18px; border-radius: 50%; background: var(--farbe); }
+.team-weg {
+  min-width: 44px;
+  min-height: 44px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--creme-leise);
+}
+
+.zaehler {
+  display: grid;
+  grid-template-columns: 56px 1fr 56px;
+  align-items: center;
+  max-width: 240px;
+}
+.zaehler-knopf {
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid var(--nacht-linie);
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1;
+}
+.zaehler-knopf:disabled { opacity: 0.35; }
+.zaehler-wert { text-align: center; font-size: 40px; font-weight: 800; line-height: 1; }
+
+/* ---------- Kategorie-Kacheln ---------- */
+
+.kacheln {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.kachel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 118px;
+  padding: 14px 14px 13px;
+  border-radius: 20px;
+  background: var(--farbe);
+  color: var(--tinte);
+  text-align: left;
+  overflow: hidden;
+}
+.kachel:active { transform: scale(0.97); }
+.kachel-emoji { font-size: 30px; line-height: 1; }
+.kachel-name {
+  font-size: 19px;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+}
+.kachel-info { display: block; margin-top: 3px; font-size: 13px; font-weight: 600; opacity: 0.72; }
+.kachel:disabled { opacity: 0.45; }
+
+/* "Dies & Das" läuft über die ganze Breite und zeigt alle Farben */
+.kachel.mix {
+  grid-column: 1 / -1;
+  min-height: 104px;
+  background:
+    linear-gradient(100deg,
+      var(--koralle) 0 20%, var(--safran) 20% 40%, var(--minze) 40% 60%,
+      var(--kobalt) 60% 80%, var(--flieder) 80% 100%);
+}
+.kachel.mix .kachel-name { font-size: 26px; }
+
+.kachel.neu {
+  background: none;
+  border: 2px dashed var(--nacht-linie);
+  color: var(--creme);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* ---------- Vor dem Zug ---------- */
+
+.bereit-karte {
+  display: grid;
+  gap: 4px;
+  padding: 22px;
+  border-radius: 24px;
+  background: var(--farbe, var(--safran));
+  color: var(--tinte);
+}
+.bereit-emoji { font-size: 40px; line-height: 1.1; }
+.bereit-name { font-size: 34px; font-weight: 800; line-height: 1; letter-spacing: -0.02em; overflow-wrap: anywhere; }
+.bereit-hinweis { font-size: 15px; font-weight: 600; }
+.bereit-hinweis:empty { display: none; }
+
+.dran { font-size: 15px; font-weight: 600; color: var(--creme-leise); }
+.dran-name {
+  font-size: 46px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--farbe, var(--creme));
+  overflow-wrap: anywhere;
+}
+#bereitTeam { display: grid; gap: 6px; }
+#bereitEinstellungen { display: grid; gap: 22px; }
+
+.stand { display: grid; gap: 6px; margin-top: 14px; }
+.stand-zeile {
+  display: grid;
+  grid-template-columns: 14px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+}
+.stand-zeile .team-punkt { width: 14px; height: 14px; }
+.stand-punkte { font-weight: 800; font-variant-numeric: tabular-nums; }
+
+/* ---------- Ergebnis ---------- */
+
+.punkte { text-align: center; }
+.punkte-zahl {
+  font-size: 112px;
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  color: var(--minze);
+}
+.punkte-text { font-size: 19px; font-weight: 700; }
+
+.verlauf { list-style: none; display: grid; gap: 6px; }
+.verlauf button {
+  display: grid;
+  grid-template-columns: 26px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 50px;
+  padding: 8px 14px;
+  border-radius: 14px;
+  background: var(--nacht-hell);
+  text-align: left;
+}
+.verlauf-nr { font-size: 14px; color: var(--creme-leise); font-variant-numeric: tabular-nums; }
+.verlauf-wort { font-weight: 700; overflow-wrap: anywhere; }
+.verlauf-status {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--tinte);
+}
+.status-erraten .verlauf-status { background: var(--richtig); }
+.status-uebersprungen .verlauf-status { background: var(--weiter); }
+.status-offen .verlauf-status { background: var(--creme-leise); }
+.status-uebersprungen .verlauf-wort,
+.status-offen .verlauf-wort { color: var(--creme-leise); }
+
+/* ---------- Siegerehrung ---------- */
+
+.sieger {
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  overflow-wrap: anywhere;
+}
+.rangliste { list-style: none; display: grid; gap: 8px; }
+.rang {
+  display: grid;
+  grid-template-columns: 34px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: 18px;
+  background: var(--nacht-hell);
+  font-weight: 700;
+}
+.rang.erster { background: var(--farbe); color: var(--tinte); }
+.rang-platz { font-size: 22px; font-weight: 800; }
+.rang-name { font-size: 20px; overflow-wrap: anywhere; }
+.rang-punkte { font-size: 26px; font-weight: 800; font-variant-numeric: tabular-nums; }
+
+/* ---------- Eigene Kategorien ---------- */
+
+#eigeneListe { display: grid; gap: 8px; }
+.eigen-zeile {
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: var(--nacht-hell);
+  text-align: left;
+}
+.eigen-emoji {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--farbe);
+  font-size: 22px;
+}
+.eigen-name { font-weight: 700; font-size: 18px; overflow-wrap: anywhere; }
+.eigen-info { display: block; font-size: 14px; font-weight: 500; color: var(--creme-leise); }
+.eigen-pfeil { color: var(--creme-leise); font-weight: 600; font-size: 15px; }
+
+.leer {
+  padding: 22px;
+  border-radius: 18px;
+  border: 2px dashed var(--nacht-linie);
+  color: var(--creme-leise);
+}
+
+.emoji-wahl { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; }
+.emoji-knopf {
+  aspect-ratio: 1;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  background: var(--nacht-hell);
+  font-size: 20px;
+}
+.emoji-knopf.an { border-color: var(--safran); }
+
+.begriff-form { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
+.begriff-form .knopf { min-height: 50px; padding: 10px 16px; font-size: 16px; }
+
+.begriffe { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+.begriffe li {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  border-radius: 999px;
+  background: var(--nacht-hell);
+  font-weight: 600;
+}
+.begriffe li span { padding: 8px 4px 8px 14px; overflow-wrap: anywhere; }
+.begriff-weg {
+  min-width: 40px;
+  min-height: 40px;
+  font-size: 18px;
+  color: var(--creme-leise);
+}
+
+/* ---------- So geht's ---------- */
+
+.hilfe { display: grid; gap: 12px; max-width: 60ch; }
+.hilfe h3 { margin-top: 12px; font-size: 21px; font-weight: 800; letter-spacing: -0.01em; }
+.hilfe ol { padding-left: 22px; display: grid; gap: 6px; }
+.hilfe p, .hilfe li { color: #E4DBF5; }
+
+/* =====================================================================
+   SPIELBÜHNE
+   Liegt während einer Runde über allem. Ist das iPhone im Hochformat
+   gesperrt, dreht app.js die Bühne um 90 Grad, damit der Begriff im
+   Querformat richtig herum steht.
+   ===================================================================== */
+
+.buehne {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: 50;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: 22px max(54px, env(safe-area-inset-right)) 20px max(54px, env(safe-area-inset-left));
+  background: var(--farbe, var(--safran));
+  color: var(--tinte);
+  overflow: hidden;
+}
+
+.zeit-balken {
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 10px;
+  background: rgba(21, 15, 45, 0.18);
+}
+.zeit-fuellung {
+  width: 100%;
+  height: 100%;
+  background: var(--tinte);
+  transform-origin: left center;
+}
+
+.buehne-oben {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 12px;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 1;
+}
+.zeit { font-variant-numeric: tabular-nums; font-size: 30px; }
+.zeit.knapp { animation: puls 1s steps(2, jump-none) infinite; }
+.treffer { text-align: right; }
+.pause-knopf {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 2px solid rgba(21, 15, 45, 0.35);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.wort-box {
+  display: grid;
+  place-items: center;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+}
+.wort {
+  width: 100%;
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  text-align: center;
+  text-wrap: balance;
+}
+.buehne-unten {
+  min-height: 24px;
+  font-size: 17px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Zustände der Bühne */
+.buehne.phase-platzieren .buehne-oben,
+.buehne.phase-countdown .buehne-oben,
+.buehne.phase-ende .buehne-oben,
+.buehne.phase-platzieren .zeit-balken,
+.buehne.phase-countdown .zeit-balken { visibility: hidden; }
+
+.buehne.blitz-ja { background: var(--richtig); }
+.buehne.blitz-nein { background: var(--weiter); }
+
+.tipp-knoepfe {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 10px;
+}
+.tipp-knopf {
+  min-height: 68px;
+  border-radius: 20px;
+  font-size: 21px;
+  font-weight: 800;
+  color: var(--tinte);
+  border: 3px solid var(--tinte);
+}
+.tipp-knopf.ja { background: var(--tinte); color: var(--creme); }
+.tipp-knopf:active { transform: scale(0.97); }
+.buehne:not(.phase-spiel) .tipp-knoepfe { display: none; }
+
+.buehne-pause {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: grid;
+  place-content: center;
+  gap: 18px;
+  background: var(--nacht);
+  color: var(--creme);
+  text-align: center;
+}
+.buehne-pause p { font-size: 44px; font-weight: 800; letter-spacing: -0.02em; }
+.pause-knoepfe { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+
+@keyframes puls { 50% { opacity: 0.35; } }
+
+/* ---------- Dialog und Kurzmeldung ---------- */
+
+.schleier {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(10, 6, 26, 0.72);
+}
+.dialog-box {
+  display: grid;
+  gap: 16px;
+  width: 100%;
+  max-width: 420px;
+  padding: 22px;
+  border-radius: 24px;
+  background: var(--nacht-hell);
+}
+.dialog-text { font-size: 18px; font-weight: 600; white-space: pre-line; }
+.dialog-feld { min-height: 130px; font-size: 16px; resize: none; }
+.dialog-knoepfe { display: grid; gap: 8px; }
+
+.meldung {
+  position: fixed;
+  left: 50%;
+  top: calc(var(--rand-oben) + 14px);
+  z-index: 90;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: calc(100vw - 40px);
+  padding: 12px 18px;
+  border-radius: 16px;
+  background: var(--creme);
+  color: var(--tinte);
+  font-weight: 700;
+  font-size: 15px;
+  text-align: center;
+  box-shadow: 0 8px 28px rgba(10, 6, 26, 0.5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
