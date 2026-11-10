@@ -36,7 +36,8 @@ const KATEGORIEN = [
       "Specht", "Storch", "Schwan", "Möwe", "Kolibri", "Strauß", "Truthahn", "Hahn", "Esel",
       "Alpaka", "Kamel", "Schaf", "Ziege", "Wildschwein", "Meerschweinchen", "Hamster",
       "Goldfisch", "Dackel", "Mops", "Golden Retriever", "Schäferhund", "Pudel", "Gorilla",
-      "Schimpanse", "Erdmännchen", "Panda", "Elch", "Rentier", "Murmeltier", "Kakerlake", "Weisskopfseeadler"
+      "Schimpanse", "Erdmännchen", "Panda", "Elch", "Rentier", "Murmeltier", "Kakerlake", "Schnabeltier", 
+      "Geko", "Nacktmull", "Axolotl", "Weisskopfseeadler"
     ]
   },
   {
@@ -53,15 +54,16 @@ const KATEGORIEN = [
       "Joko Winterscheidt", "Klaas Heufer-Umlauf", "Elyas M'Barek", "Matthias Schweighöfer",
       "Til Schweiger", "Lena Meyer-Landrut", "Nena", "Herbert Grönemeyer", "Udo Lindenberg",
       "Dieter Bohlen", "Bill Kaulitz", "Shirin David", "Nina Chuba", "Mark Forster",
-      "Sarah Connor", "Thomas Müller", "Manuel Neuer", "Toni Kroos", "Lionel Messi",
+      "Sarah Connor", "Thomas Müller", "Manuel Neuer", "Leon Goretzka", "Lionel Messi",
       "Cristiano Ronaldo", "David Beckham", "Serena Williams", "Dirk Nowitzki",
       "Michael Schumacher", "Steffi Graf", "Boris Becker", "Leonardo DiCaprio", "Brad Pitt",
       "Angelina Jolie", "Jennifer Aniston", "Julia Roberts", "Emma Watson", "Zendaya",
       "Timothée Chalamet", "Ryan Gosling", "Margot Robbie", "Tom Hanks", "Johnny Depp",
       "Will Smith", "Keanu Reeves", "Meryl Streep", "Kim Kardashian", "Paris Hilton",
       "Oprah Winfrey", "Barack Obama", "Michelle Obama", "König Charles", "Prinz Harry",
-      "Meghan Markle", "Prinzessin Kate", "Bill Gates", "Greta Thunberg", "Albert Einstein",
-      "Marilyn Monroe", "Audrey Hepburn", "Coco Chanel", "Karl Lagerfeld"
+      "Meghan Markle", "Prinzessin Kate", "Bill Gates", "Albert Einstein", "Marie Curie",
+      "Marilyn Monroe", "Audrey Hepburn", "Coco Chanel", "Karl Lagerfeld", "Frida Kahlo", "Rosa Parks",
+       "Serena Williams", "Tina Turner", "Astrid Lindgren", "Simone Biles",
     ]
   },
   {
@@ -113,7 +115,7 @@ const KATEGORIEN = [
   {
     id: "essen",
     name: "Essen",
-    emoji: "🍕",
+    emoji: "🍴",
     farbe: "#FF8A3D",
     begriffe: [
       "Pizza", "Spaghetti Bolognese", "Lasagne", "Döner", "Currywurst", "Schnitzel",
@@ -126,15 +128,15 @@ const KATEGORIEN = [
       "Spaghettieis", "Bananensplit", "Avocado", "Ananas", "Wassermelone", "Erdbeere",
       "Granatapfel", "Kokosnuss", "Brokkoli", "Rosenkohl", "Spargel", "Kürbis", "Knoblauch",
       "Müsli", "Rührei", "Spiegelei", "Gulaschsuppe", "Rinderroulade", "Sauerbraten", "Frikadellen",
-       "Tomatensuppe", "Pho", "Dim Sum", "Gyoza", "Bibimbap", "Pad Thai", "Butter Chicken", "Biryani", 
-       "Samosa", "Naan", "Dal", "Couscous", "Shakshuka", "Gyros", "Souvlaki", "Moussaka", "Tzatziki", 
-       "Ratatouille", "Bruschetta", "Risotto", "Gnocchi", "Ravioli", "Carbonara", "Pesto", "Lachs", 
-       "Fischstäbchen", "Matjes", "Garnelen", "Fish and Chips", "Grillhähnchen", "Kohlrouladen", 
-       "Hackbraten", "Leberkäse", "Obatzda", "Flammkuchen", "Quiche", "Ofenkartoffel", "Kartoffelpuffer", 
-       "Semmelknödel", "Rösti", "Bagel", "Porridge", "Club Sandwich", "Overnight Oats", "Pavlova", 
-       "Crème brûlée", "Panna cotta", "Mousse au Chocolat", "Macarons", "Eclair", "Rote Grütze", 
-       "Dampfnudeln", "Stollen", "Baklava", "Churros", "Mango", "Heidelbeeren", "Himbeeren", 
-       "Feigen", "Kiwi", "Zitrone", "Gurke", "Paprika", "Linseneintopf", "Kartoffelsuppe"
+      "Tomatensuppe", "Pho", "Dim Sum", "Gyoza", "Pad Thai", "Butter Chicken", "Biryani", 
+      "Samosa", "Naan", "Dal", "Couscous", "Shakshuka", "Gyros", "Souvlaki", "Moussaka", "Tzatziki", 
+      "Ratatouille", "Bruschetta", "Risotto", "Gnocchi", "Ravioli", "Carbonara", "Pesto", "Lachs", 
+      "Fischstäbchen", "Matjes", "Garnelen", "Fish & Chips", "Grillhendl", "Rindsrouladen", 
+      "Schweinebraten", "Leberkas", "Obatzda", "Flammkuchen", "Quiche", "Ofenkartoffel", "Reiberdatschi", 
+      "Semmelknödel", "Rösti", "Bagel", "Porridge", "Club Sandwich", "Overnight Oats", "Pavlova", 
+      "Crème brûlée", "Panna cotta", "Mousse au Chocolat", "Macarons", "Eclair", "Rote Grütze", 
+      "Dampfnudeln", "Stollen", "Baklava", "Churros", "Mango", "Heidelbeeren", "Himbeeren", 
+      "Feigen", "Kiwi", "Zitrone", "Gurke", "Paprika", "Linseneintopf", "Kartoffelsuppe"
     ]
    },
   {
@@ -144,16 +146,16 @@ const KATEGORIEN = [
     farbe: "#3CC4F0",
     begriffe: [
       "Aperol Spritz", "Hugo", "Glühwein", "Sekt", "Caipirinha", "Mojito", "Negroni", "Campari Orange", 
-       "Gin Tonic", "Moscow Mule", "Cuba Libre", "Whiskey Sour", "Old Fashioned", "Manhattan", "Martini", 
+       "Gin Tonic", "Moscow Mule", "Cuba Libre", "Whiskey Sour", "Manhattan", "Martini", 
        "Daiquiri", "Margarita", "Piña Colada", "Tequila Sunrise", "Long Island Iced Tea", "Espresso Martini", 
        "Bellini", "Mimosa", "Kir Royal", "Lillet Wild Berry", "Radler", "Weißbier", "Pils", "Kölsch", "Alt", 
        "Berliner Weiße mit Schuss", "Jägermeister", "Korn", "Sangria", "Cosmopolitan", 
        "Apfelschorle", "Virgin Mojito", "Heiße Schokolade", "Cappuccino", "Latte Macchiato", 
        "Espresso", "Filterkaffee", "Chai Latte", "Matcha Latte", "Kurkuma-Latte", "Smoothie", 
-       "Frisch gepresster Orangensaft", "Bananenmilchshake", "Hausgemachte Limonade", "Holunderblütenschorle", 
-       "Ginger Ale", "Ginger Beer", "Tonic Water", "Cola", "Orangenlimonade", "Eistee", "Grüner Tee", 
+       "Frisch gepresster Orangensaft", "Milchshake", "Hausgemachte Limonade", "Holunderblütenschorle", 
+       "Ginger Ale", "Tonic Water", "Cola", "Orangenlimonade", "Eistee", "Grüner Tee", 
        "Schwarzer Tee", "Rooibos-Tee", "Pfefferminztee", "Ingwertee", "Kombucha", "Mineralwasser", "Zitronenwasser", 
-       "Hibiskustee", "Virgin Piña Colada", "Shirley Temple", "Traubensaft", "Apfelsaft", "Frappé"
+       "Hibiskustee", "Virgin Piña Colada", "Traubensaft", "Apfelsaft", "Frappé", "Rüscherl, "Voddi Bull", "Liquid Cocaine"
     ]
   },
   {
@@ -228,7 +230,7 @@ const KATEGORIEN = [
     id: "sport",
     name: "Sport & Hobbys",
     emoji: "🏓",
-    farbe: "#B6E33A",
+    farbe: "FFB627",
     begriffe: [
       "Fußball", "Handball", "Volleyball", "Basketball", "Tennis", "Tischtennis", "Badminton",
       "Golf", "Eishockey", "Rugby", "Baseball", "Judo", "Karate", "Fechten", "Turnen",
@@ -246,8 +248,8 @@ const KATEGORIEN = [
     ]
   },
   {
-    id: "kindheit",
-    name: "Kindheit",
+    id: "neunziger",
+    name: "90er",
     emoji: "📼",
     farbe: "#FFD84D",
     begriffe: [
@@ -259,7 +261,7 @@ const KATEGORIEN = [
       "Wickie", "Hanni und Nanni", "Conni", "Der Regenbogenfisch", "Bravo", "Wendy",
       "Bravo Hits", "MP3-Player", "Discman", "Kassettenrekorder", "Röhrenfernseher",
       "Videothek", "Klapphandy", "Snake", "SMS", "Klingelton", "Crazy Frog", "Schnappi", "ICQ",
-      "SchülerVZ", "Tokio Hotel", "Spice Girls", "Backstreet Boys", "Schlaghose",
+      "SchülerVZ", "Tokio Hotel", "Spice Girls",
       "Tattoo-Kette", "Schulranzen", "Füller", "Tintenkiller", "Federmäppchen",
       "Hausaufgabenheft", "Bundesjugendspiele", "Klassenfahrt", "Pausenbrot", "Center Shock",
       "Esspapier", "Brausepulver", "Wassereis", "Fruchtzwerge", "Hubba Bubba", "Gummitwist",
