@@ -230,7 +230,7 @@ const KATEGORIEN = [
     id: "sport",
     name: "Sport & Hobbys",
     emoji: "🏓",
-    farbe: "FFB627",
+    farbe: "#FFB627",
     begriffe: [
       "Fußball", "Handball", "Volleyball", "Basketball", "Tennis", "Tischtennis", "Badminton",
       "Golf", "Eishockey", "Rugby", "Baseball", "Judo", "Karate", "Fechten", "Turnen",
