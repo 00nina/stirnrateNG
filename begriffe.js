@@ -129,6 +129,26 @@ const KATEGORIEN = [
       "Weißbier", "Gin Tonic", "Mojito", "Espresso Martini", "Cappuccino", "Latte macchiato",
       "Matcha Latte", "Bubble Tea", "Eistee", "Apfelschorle", "Heiße Schokolade", "Smoothie"
     ]
+   },
+  {
+    id: "trinken",
+    name: "Essen & Trinken",
+    emoji: "🥤",
+    farbe: "#FF8A3D",
+    begriffe: [
+      "Pizza", "Spaghetti Bolognese", "Lasagne", "Döner", "Currywurst", "Schnitzel",
+      "Bratwurst", "Brezel", "Käsespätzle", "Sauerkraut", "Kartoffelsalat", "Maultaschen",
+      "Sushi", "Burger", "Pommes", "Hotdog", "Tacos", "Burrito", "Falafel", "Hummus", "Ramen",
+      "Frühlingsrolle", "Paella", "Croissant", "Baguette", "Crêpe", "Raclette", "Käsefondue",
+      "Tiramisu", "Apfelstrudel", "Kaiserschmarrn", "Schwarzwälder Kirschtorte", "Käsekuchen",
+      "Donut", "Muffin", "Brownie", "Waffel", "Pfannkuchen", "Milchreis", "Vanillepudding",
+      "Gummibärchen", "Schokolade", "Popcorn", "Chips", "Zuckerwatte", "Lebkuchen", "Marzipan",
+      "Spaghettieis", "Bananensplit", "Avocado", "Ananas", "Wassermelone", "Erdbeere",
+      "Granatapfel", "Kokosnuss", "Brokkoli", "Rosenkohl", "Spargel", "Kürbis", "Knoblauch",
+      "Müsli", "Rührei", "Spiegelei", "Aperol Spritz", "Hugo", "Glühwein", "Sekt", "Radler",
+      "Weißbier", "Gin Tonic", "Mojito", "Espresso Martini", "Cappuccino", "Latte macchiato",
+      "Matcha Latte", "Bubble Tea", "Eistee", "Apfelschorle", "Heiße Schokolade", "Smoothie"
+    ]
   },
   {
     id: "orte",
