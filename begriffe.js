@@ -112,7 +112,7 @@ const KATEGORIEN = [
   },
   {
     id: "essen",
-    name: "Essen & Trinken",
+    name: "Essen",
     emoji: "🍕",
     farbe: "#FF8A3D",
     begriffe: [
@@ -132,7 +132,7 @@ const KATEGORIEN = [
    },
   {
     id: "trinken",
-    name: "Essen & Trinken",
+    name: "Trinken",
     emoji: "🥤",
     farbe: "#FF8A3D",
     begriffe: [
