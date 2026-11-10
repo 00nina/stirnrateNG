@@ -63,7 +63,7 @@ const KATEGORIEN = [
       "Oprah Winfrey", "Barack Obama", "Michelle Obama", "König Charles", "Prinz Harry",
       "Meghan Markle", "Prinzessin Kate", "Bill Gates", "Albert Einstein", "Marie Curie",
       "Marilyn Monroe", "Audrey Hepburn", "Coco Chanel", "Karl Lagerfeld", "Frida Kahlo", "Rosa Parks",
-       "Serena Williams", "Tina Turner", "Astrid Lindgren", "Simone Biles",
+       "Serena Williams", "Tina Turner", "Astrid Lindgren", "Simone Biles"
     ]
   },
   {
