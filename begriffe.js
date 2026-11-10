@@ -36,7 +36,7 @@ const KATEGORIEN = [
       "Specht", "Storch", "Schwan", "Möwe", "Kolibri", "Strauß", "Truthahn", "Hahn", "Esel",
       "Alpaka", "Kamel", "Schaf", "Ziege", "Wildschwein", "Meerschweinchen", "Hamster",
       "Goldfisch", "Dackel", "Mops", "Golden Retriever", "Schäferhund", "Pudel", "Gorilla",
-      "Schimpanse", "Erdmännchen", "Panda", "Elch", "Rentier", "Murmeltier", "Einhorn", "Drache"
+      "Schimpanse", "Erdmännchen", "Panda", "Elch", "Rentier", "Murmeltier", "Feuerfisch", "Kakalake", 
     ]
   },
   {
@@ -46,14 +46,14 @@ const KATEGORIEN = [
     farbe: "#FFB627",
     begriffe: [
       "Taylor Swift", "Beyoncé", "Rihanna", "Lady Gaga", "Adele", "Ed Sheeran", "Harry Styles",
-      "Billie Eilish", "Dua Lipa", "Ariana Grande", "Justin Bieber", "Shakira", "Madonna",
+      "Billie Eilish", "Ariana Grande", "Justin Bieber", "Shakira", "Madonna", "Demi Lovato",
       "Britney Spears", "Jennifer Lopez", "Miley Cyrus", "Selena Gomez", "Katy Perry",
       "Michael Jackson", "Elvis Presley", "Helene Fischer", "Heidi Klum", "Angela Merkel",
       "Thomas Gottschalk", "Günther Jauch", "Stefan Raab", "Barbara Schöneberger",
       "Joko Winterscheidt", "Klaas Heufer-Umlauf", "Elyas M'Barek", "Matthias Schweighöfer",
       "Til Schweiger", "Lena Meyer-Landrut", "Nena", "Herbert Grönemeyer", "Udo Lindenberg",
       "Dieter Bohlen", "Bill Kaulitz", "Shirin David", "Nina Chuba", "Mark Forster",
-      "Sarah Connor", "Thomas Müller", "Manuel Neuer", "Toni Kroos", "Lionel Messi",
+      "Leon Goretzka", "Thomas Müller", "Manuel Neuer", "Mats Hummels", "Lionel Messi",
       "Cristiano Ronaldo", "David Beckham", "Serena Williams", "Dirk Nowitzki",
       "Michael Schumacher", "Steffi Graf", "Boris Becker", "Leonardo DiCaprio", "Brad Pitt",
       "Angelina Jolie", "Jennifer Aniston", "Julia Roberts", "Emma Watson", "Zendaya",
@@ -112,7 +112,7 @@ const KATEGORIEN = [
   },
   {
     id: "essen",
-    name: "Essen & Trinken",
+    name: "Essen",
     emoji: "🍕",
     farbe: "#FF8A3D",
     begriffe: [
@@ -125,9 +125,35 @@ const KATEGORIEN = [
       "Gummibärchen", "Schokolade", "Popcorn", "Chips", "Zuckerwatte", "Lebkuchen", "Marzipan",
       "Spaghettieis", "Bananensplit", "Avocado", "Ananas", "Wassermelone", "Erdbeere",
       "Granatapfel", "Kokosnuss", "Brokkoli", "Rosenkohl", "Spargel", "Kürbis", "Knoblauch",
-      "Müsli", "Rührei", "Spiegelei", "Aperol Spritz", "Hugo", "Glühwein", "Sekt", "Radler",
-      "Weißbier", "Gin Tonic", "Mojito", "Espresso Martini", "Cappuccino", "Latte macchiato",
-      "Matcha Latte", "Bubble Tea", "Eistee", "Apfelschorle", "Heiße Schokolade", "Smoothie"
+      "Müsli", "Rührei", "Spiegelei", "Gulaschsuppe", "Rinderroulade", "Sauerbraten", 
+       "Frikadellen", "Linseneintopf", "Kartoffelsuppe", "Tomatensuppe", "Pho", "Dim Sum", 
+       "Gyoza", "Bibimbap", "Pad Thai", "Butter Chicken",  "Samosa", "Naan", "Dal", "Couscous", 
+       "Shakshuka", "Gyros", "Souvlaki", "Moussaka", "Tzatziki", "Ratatouille", "Bruschetta", 
+       "Risotto", "Gnocchi", "Ravioli", "Carbonara", "Pesto", "Lachs", "Fischstäbchen", "Matjes", 
+       "Garnelen", "Fish & Chips", "Grillhendl", "Rindsrouladen", "Schweinebraten", "Leberkäse", 
+       "Obatzda", "Flammkuchen", "Quiche", "Ofenkartoffel", "Reiberdatschi", "Semmelknödel", 
+       "Rösti", "Bagel", "Porridge", "Club Sandwich", "Overnight Oats", "Crème brûlée", 
+       "Panna cotta", "Mousse au Chocolat", "Macarons", "Rote Grütze", "Dampfnudeln", "Stollen", 
+       "Baklava", "Churros", "Mango", "Heidelbeeren", "Himbeeren", "Feigen", "Kiwi", "Zitrone", "Gurke", "Paprika"
+  },
+     {
+    id: "getraenke",
+    name: "Getränke",
+    emoji: "🥤",
+    farbe: "#FF8A3D",
+    begriffe: [
+      "Aperol Spritz", "Hugo", "Glühwein", "Sekt", "Caipirinha", "Mojito", "Negroni", 
+      "Campari Orange", "Gin Tonic", "Moscow Mule", "Cuba Libre", "Martini", "Daiquiri", 
+      "Margarita", "Piña Colada", "Tequila Sunrise", "Long Island Iced Tea", "Espresso Martini", 
+      "Bellini", "Mimosa", "Kir Royal", "Lillet Wild Berry", "Radler", "Weißbier", "Pils", "Kölsch",
+      "Jägermeister", "Korn", "Sangria", "Apfelschorle", "Heiße Schokolade", "Cappuccino", "Latte Macchiato", 
+      "Espresso", "Filterkaffee", "Chai Latte", "Matcha Latte", "Smoothie", "Orangensaft",
+      "gelbes Limo", "Ginger Ale", "Tonic Water", "Cola", 
+      "Eistee", "Grüner Tee", "Schwarzer Tee", "Rooibos-Tee", "Pfefferminztee", "Ingwertee", 
+      "Kombucha", "Mineralwasser", "Hibiskustee", "Traubensaft", "Apfelsaft", "Frappé"
+      "Aperol Spritz", "Hugo", "Glühwein", "Sekt", "Radler",
+      "Espresso Martini", "Matcha Latte", "Bubble Tea",
+       "Liquid Cocaine", "Rüscherl", "Voddi Bull", "Stamperl"
     ]
   },
   {
